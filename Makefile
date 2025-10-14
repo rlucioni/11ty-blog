@@ -1,8 +1,8 @@
-build:
-	npx @11ty/eleventy
+build: clean
+	npm run build
 
 clean:
 	rm -rf _site
 
 serve:
-	npx @11ty/eleventy --serve
+	npm run serve

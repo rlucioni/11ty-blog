@@ -6,6 +6,7 @@ import { createHash } from 'crypto';
 import { writeFileSync, existsSync, mkdirSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
+import { eleventyImageTransformPlugin } from "@11ty/eleventy-img";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -46,6 +47,19 @@ async function compileCSS() {
 
 export default async function(eleventyConfig) {
   eleventyConfig.setInputDirectory('content');
+
+  eleventyConfig.addPlugin(eleventyImageTransformPlugin, {
+    transformOnRequest: false,
+		formats: ['avif', 'webp', 'jpeg'],
+		widths: ['auto'],
+		htmlOptions: {
+			imgAttributes: {
+				loading: 'lazy',
+				decoding: 'async',
+			},
+			pictureAttributes: {}
+		},
+	});
 
   eleventyConfig.addPassthroughCopy({
     './static/': '/',
