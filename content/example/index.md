@@ -51,7 +51,7 @@ This is an h6. No difference.
 
 ## Code
 
-Now let's look at some code. Here's some `inline code`. What about code blocks? This one uses code fences. I hope it has [syntax highlighting](https://gohugo.io/content-management/syntax-highlighting/)!
+Now let's look at some code. Here's some `inline code`. What about code blocks? This one uses code fences. It should have syntax highlighting.
 
 ```python
 import os

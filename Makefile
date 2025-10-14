@@ -4,5 +4,5 @@ build: clean
 clean:
 	rm -rf _site
 
-serve:
+serve: clean
 	npm run serve

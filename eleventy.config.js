@@ -3,10 +3,11 @@ import postcss from 'postcss';
 import autoprefixer from 'autoprefixer';
 import cssnano from 'cssnano';
 import { createHash } from 'crypto';
-import { writeFileSync, existsSync, mkdirSync } from 'fs';
-import { join, dirname } from 'path';
+import { writeFileSync, existsSync, mkdirSync, readdirSync, readFileSync } from 'fs';
+import { join, dirname, extname } from 'path';
 import { fileURLToPath } from 'url';
-import { eleventyImageTransformPlugin } from "@11ty/eleventy-img";
+import { eleventyImageTransformPlugin } from '@11ty/eleventy-img';
+import syntaxHighlight from '@11ty/eleventy-plugin-syntaxhighlight';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -14,14 +15,30 @@ const __dirname = dirname(__filename);
 async function compileCSS() {
   console.log('compiling css');
 
-  const scssPath = join(__dirname, 'assets/scss/main.scss');
+  const scssDir = join(__dirname, 'assets/scss');
   const outputDir = join(__dirname, '_site/css');
 
   if (!existsSync(outputDir)) {
     mkdirSync(outputDir, { recursive: true });
   }
 
-  const scssResult = sass.compile(scssPath, { style: 'expanded' });
+  const scssFiles = readdirSync(scssDir)
+    .filter(file => extname(file) === '.scss')
+    .sort();
+
+  console.log(`found ${scssFiles.length} scss files: ${scssFiles.join(', ')}`);
+
+  let concatenatedScss = '';
+  for (const file of scssFiles) {
+    const filePath = join(scssDir, file);
+    const fileContent = readFileSync(filePath, 'utf8');
+    concatenatedScss += `/* ${file} */\n${fileContent}\n\n`;
+  }
+
+  const scssResult = sass.compileString(concatenatedScss, { 
+    style: 'expanded',
+    loadPaths: [scssDir]
+  });
 
   const postcssResult = await postcss([
     autoprefixer,
@@ -61,11 +78,22 @@ export default async function(eleventyConfig) {
 		},
 	});
 
+  eleventyConfig.addPlugin(syntaxHighlight, {
+    preAttributes: {
+      class: 'highlight',
+    },
+  });
+
   eleventyConfig.addPassthroughCopy({
     './static/': '/',
   });
 
-  const cssFilename = await compileCSS();
+  let cssFilename;
+  eleventyConfig.on('eleventy.before', async () => {
+    cssFilename = await compileCSS();
+  });
+
+  eleventyConfig.addWatchTarget('assets/scss/');
 
   eleventyConfig.addShortcode('css', () => cssFilename);
 };
