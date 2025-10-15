@@ -2,7 +2,7 @@ build: clean
 	npm run build
 
 clean:
-	rm -rf _site
+	rm -rf dist
 
 serve: clean
 	npm run serve
