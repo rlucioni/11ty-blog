@@ -43,7 +43,7 @@ async function compileCSS() {
   writeFileSync(filepath, postcssResult.css);
   console.info(`wrote css to ${filepath}`);
 
-  return filename;
+  return `/${filename}`;
 }
 
 export default async function(eleventyConfig) {
@@ -71,10 +71,10 @@ export default async function(eleventyConfig) {
     [staticDir]: '/',
   });
 
-  let cssFilename;
+  let cssPath;
   eleventyConfig.on('eleventy.before', async () => {
-    cssFilename = await compileCSS();
+    cssPath = await compileCSS();
   });
-  eleventyConfig.addShortcode('css', () => cssFilename);
+  eleventyConfig.addShortcode('cssPath', () => cssPath);
   eleventyConfig.addWatchTarget(`${config.dir.input}/assets/scss/`);
 };

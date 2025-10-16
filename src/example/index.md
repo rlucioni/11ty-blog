@@ -6,7 +6,6 @@ tags: post
 layout: post.liquid
 draft: true
 ---
-
 This is an example post to showcase Markdown and other markup rendering.
 
 *Here's some italicized text.* **And here's some bolded text.** ~~Here's some strikethrough.~~
