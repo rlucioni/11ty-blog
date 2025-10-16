@@ -1,7 +1,8 @@
 ---
 title: Test Post
 description: Test post please ignore
-date: 2025-10-13
+date: 2025-01-13
+lastmod: 2025-02-13
 tags: post
 layout: post.liquid
 ---
