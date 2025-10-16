@@ -47,18 +47,24 @@ async function compileCSS() {
 }
 
 export default async function(eleventyConfig) {
+  eleventyConfig.addPreprocessor('drafts', '*', (data) => {
+    if (data.draft && process.env.ELEVENTY_RUN_MODE === 'build') {
+      return false;
+    }
+  });
+
   eleventyConfig.addPlugin(eleventyImageTransformPlugin, {
     transformOnRequest: false,
-		formats: ['avif', 'webp', 'jpeg'],
-		widths: ['auto'],
-		htmlOptions: {
-			imgAttributes: {
-				loading: 'lazy',
-				decoding: 'async',
-			},
-			pictureAttributes: {}
-		},
-	});
+    formats: ['avif', 'webp', 'jpeg'],
+    widths: ['auto'],
+    htmlOptions: {
+      imgAttributes: {
+        loading: 'lazy',
+        decoding: 'async',
+      },
+      pictureAttributes: {}
+    },
+  });
 
   eleventyConfig.addPlugin(syntaxHighlight, {
     preAttributes: {
