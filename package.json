@@ -20,13 +20,13 @@
   "homepage": "https://github.com/rlucioni/11ty-blog#readme",
   "type": "module",
   "dependencies": {
-    "@11ty/eleventy": "^3.1.2",
-    "@11ty/eleventy-img": "^6.0.4",
-    "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.2",
-    "autoprefixer": "^10.4.21",
-    "cssnano": "^7.1.1",
-    "postcss": "^8.5.6",
-    "postcss-cli": "^11.0.1",
-    "sass": "^1.93.2"
+    "@11ty/eleventy": "3.1.2",
+    "@11ty/eleventy-img": "6.0.4",
+    "@11ty/eleventy-plugin-syntaxhighlight": "5.0.2",
+    "autoprefixer": "10.4.21",
+    "cssnano": "7.1.1",
+    "postcss": "8.5.6",
+    "postcss-cli": "11.0.1",
+    "sass": "1.93.2"
   }
 }
