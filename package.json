@@ -3,10 +3,6 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {
-    "build": "eleventy",
-    "serve": "eleventy --serve"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/rlucioni/11ty-blog.git"
@@ -28,5 +24,11 @@
     "postcss": "8.5.6",
     "postcss-cli": "11.0.1",
     "sass": "1.93.2"
+  },
+  "devDependencies": {
+    "@eslint/compat": "1.4.0",
+    "@eslint/js": "9.38.0",
+    "eslint": "9.38.0",
+    "globals": "16.4.0"
   }
 }
