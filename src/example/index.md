@@ -1,9 +1,9 @@
 ---
 title: Example
 description: Sandbox for testing static site generation features
-date: 2025-10-13
-tags: post
+date: 2025-10-13T20:00:00-04:00
 layout: post.liquid
+tags: post
 draft: true
 ---
 

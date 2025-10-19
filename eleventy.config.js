@@ -7,6 +7,8 @@ import { writeFileSync, mkdirSync } from 'fs';
 import { dirname } from 'path';
 import { eleventyImageTransformPlugin } from '@11ty/eleventy-img';
 import syntaxHighlight from '@11ty/eleventy-plugin-syntaxhighlight';
+import markdownIt from 'markdown-it';
+import markdownItAnchor from 'markdown-it-anchor';
 
 export const config = {
   dir: {
@@ -52,6 +54,9 @@ export default async function(eleventyConfig) {
       return false;
     }
   });
+
+  eleventyConfig.setLibrary('md', markdownIt({ html: true }));
+  eleventyConfig.amendLibrary('md', (mdLib) => mdLib.use(markdownItAnchor));
 
   eleventyConfig.addPlugin(eleventyImageTransformPlugin, {
     transformOnRequest: false,
