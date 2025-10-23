@@ -8,5 +8,4 @@ function greeting() {
 
 greeting();
 
-// Make AsciinemaPlayer available globally for shortcodes
 window.AsciinemaPlayer = AsciinemaPlayer;
