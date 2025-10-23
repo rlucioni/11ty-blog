@@ -20,10 +20,10 @@ export const config = {
 async function compileCSS() {
   console.info('compiling css');
 
-  const scssDir = `${config.dir.input}/assets/scss`;
-  const scssResult = sass.compile(`${scssDir}/styles.scss`, {
+  const cssDir = `${config.dir.input}/assets/css`;
+  const cssResult = sass.compile(`${cssDir}/index.scss`, {
     style: 'compressed',
-    loadPaths: [scssDir]
+    loadPaths: [cssDir]
   });
 
   const postcssResult = await postcss([
@@ -35,10 +35,10 @@ async function compileCSS() {
         },
       }]
     }),
-  ]).process(scssResult.css, { from: undefined });
+  ]).process(cssResult.css, { from: undefined });
 
   const hash = createHash('sha256').update(postcssResult.css).digest('hex');
-  const filename = `styles.min.${hash}.css`;
+  const filename = `index.min.${hash}.css`;
   const filepath = `${config.dir.output}/${filename}`;
 
   mkdirSync(dirname(filepath), { recursive: true });
@@ -87,5 +87,5 @@ export default async function(eleventyConfig) {
     cssPath = await compileCSS();
   });
   eleventyConfig.addShortcode('cssPath', () => cssPath);
-  eleventyConfig.addWatchTarget(`${config.dir.input}/assets/scss/`);
+  eleventyConfig.addWatchTarget(`${config.dir.input}/assets/css/`);
 };
