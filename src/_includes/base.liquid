@@ -9,6 +9,7 @@
     <meta name="description" content="{{ description | default: "Renzo Lucioni's personal website. Writing about past projects, fun problems, and data visualization." }}">
 
     <link rel="stylesheet" href="{% cssPath %}">
+    <link rel="stylesheet" href="{% cssPathVendor %}">
 
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.1.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.1.png">
@@ -32,7 +33,7 @@
       </nav>
     </header>
 
-    <script defer src="{% vendorPath %}"></script>
+    <script defer src="{% jsPathVendor %}"></script>
     <script defer src="{% jsPath %}"></script>
 
     <div id="main">

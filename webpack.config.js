@@ -66,6 +66,7 @@ export default () => {
             name: 'vendor',
             chunks: 'all',
             filename: 'vendor.[contenthash].js',
+            enforce: true,
           },
         },
       },

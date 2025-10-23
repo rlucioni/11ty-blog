@@ -69,16 +69,23 @@ export default async function(eleventyConfig) {
 
   eleventyConfig.addShortcode('cssPath', () => {
     const bundles = getBundleFiles();
-    return bundles.css[0] || '';
+    const mainFile = bundles.css.find(file => file.includes('main'));
+    return mainFile || '';
   });
   
+  eleventyConfig.addShortcode('cssPathVendor', () => {
+    const bundles = getBundleFiles();
+    const vendorFile = bundles.css.find(file => file.includes('vendor'));
+    return vendorFile || '';
+  });
+
   eleventyConfig.addShortcode('jsPath', () => {
     const bundles = getBundleFiles();
     const mainFile = bundles.js.find(file => file.includes('main'));
     return mainFile || '';
   });
   
-  eleventyConfig.addShortcode('vendorPath', () => {
+  eleventyConfig.addShortcode('jsPathVendor', () => {
     const bundles = getBundleFiles();
     const vendorFile = bundles.js.find(file => file.includes('vendor'));
     return vendorFile || '';
