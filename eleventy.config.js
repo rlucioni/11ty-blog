@@ -4,6 +4,7 @@ import { eleventyImageTransformPlugin } from '@11ty/eleventy-img';
 import syntaxHighlight from '@11ty/eleventy-plugin-syntaxhighlight';
 import markdownIt from 'markdown-it';
 import markdownItAnchor from 'markdown-it-anchor';
+import { minify } from 'html-minifier-terser';
 
 export const config = {
   dir: {
@@ -111,4 +112,68 @@ export default async function(eleventyConfig) {
   });
 
   eleventyConfig.setUseGitIgnore(false);
+
+  eleventyConfig.addTransform('htmlmin', async function(content, outputPath) {
+    if (outputPath && (outputPath.endsWith('.html') || outputPath.endsWith('.xml'))) {
+      try {
+        const isXml = outputPath.endsWith('.xml');
+
+        if (isXml) {
+          // More conservative minification for XML files
+          return await minify(content, {
+            removeComments: true,
+            collapseWhitespace: true,
+            removeRedundantAttributes: false, // Keep attributes for XML validity
+            removeScriptTypeAttributes: false,
+            removeStyleLinkTypeAttributes: false,
+            useShortDoctype: false, // Keep full XML declaration
+            minifyCSS: false, // Don't minify CSS in XML
+            minifyJS: false, // Don't minify JS in XML
+            removeAttributeQuotes: false, // Keep quotes for XML validity
+            removeEmptyAttributes: false, // Keep empty attributes
+            removeOptionalTags: false, // Don't remove optional tags in XML
+            removeEmptyElements: false,
+            caseSensitive: true, // XML is case sensitive
+            conservativeCollapse: true, // More conservative whitespace handling
+            html5: false, // Not HTML5
+            keepClosingSlash: true, // Keep closing slashes for XML
+            maxLineLength: false,
+            preserveLineBreaks: false,
+            quoteCharacter: '"',
+            sortAttributes: false, // Don't sort attributes in XML
+            sortClassName: false
+          });
+        } else {
+          // Full minification for HTML files
+          return await minify(content, {
+            removeComments: true,
+            collapseWhitespace: true,
+            removeRedundantAttributes: true,
+            removeScriptTypeAttributes: true,
+            removeStyleLinkTypeAttributes: true,
+            useShortDoctype: true,
+            minifyCSS: true,
+            minifyJS: true,
+            removeAttributeQuotes: true,
+            removeEmptyAttributes: true,
+            removeOptionalTags: true,
+            removeEmptyElements: false,
+            caseSensitive: false,
+            conservativeCollapse: false,
+            html5: true,
+            keepClosingSlash: false,
+            maxLineLength: false,
+            preserveLineBreaks: false,
+            quoteCharacter: '"',
+            sortAttributes: true,
+            sortClassName: true
+          });
+        }
+      } catch (err) {
+        console.error(`Error minifying ${outputPath.endsWith('.xml') ? 'XML' : 'HTML'}:`, err);
+        return content;
+      }
+    }
+    return content;
+  });
 };
