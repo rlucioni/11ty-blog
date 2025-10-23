@@ -1,11 +1,11 @@
 build: clean
-	npx @11ty/eleventy
+	npm run build
 
 clean:
 	rm -rf dist
 
+dev: clean
+	npm run dev
+
 lint:
 	npx eslint .
-
-serve: clean
-	npx @11ty/eleventy --serve

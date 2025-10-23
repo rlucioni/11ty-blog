@@ -1,10 +1,5 @@
-import * as sass from 'sass';
-import postcss from 'postcss';
-import autoprefixer from 'autoprefixer';
-import cssnano from 'cssnano';
-import { createHash } from 'crypto';
-import { writeFileSync, mkdirSync } from 'fs';
-import { dirname } from 'path';
+import { readdirSync } from 'fs';
+import { join } from 'path';
 import { eleventyImageTransformPlugin } from '@11ty/eleventy-img';
 import syntaxHighlight from '@11ty/eleventy-plugin-syntaxhighlight';
 import markdownIt from 'markdown-it';
@@ -17,35 +12,22 @@ export const config = {
   }
 };
 
-async function compileCSS() {
-  console.info('compiling css');
-
-  const cssDir = `${config.dir.input}/assets/css`;
-  const cssResult = sass.compile(`${cssDir}/index.scss`, {
-    style: 'compressed',
-    loadPaths: [cssDir]
-  });
-
-  const postcssResult = await postcss([
-    autoprefixer,
-    cssnano({
-      preset: ['default', {
-        discardComments: {
-          removeAll: true,
-        },
-      }]
-    }),
-  ]).process(cssResult.css, { from: undefined });
-
-  const hash = createHash('sha256').update(postcssResult.css).digest('hex');
-  const filename = `index.min.${hash}.css`;
-  const filepath = `${config.dir.output}/${filename}`;
-
-  mkdirSync(dirname(filepath), { recursive: true });
-  writeFileSync(filepath, postcssResult.css);
-  console.info(`wrote css to ${filepath}`);
-
-  return `/${filename}`;
+function getBundleFiles() {
+  const bundlesDir = join(config.dir.input, 'assets/bundles');
+  
+  try {
+    const files = readdirSync(bundlesDir);
+    const cssFiles = files.filter(file => file.endsWith('.css'));
+    const jsFiles = files.filter(file => file.endsWith('.js'));
+    
+    return {
+      css: cssFiles.map(file => `/${file}`),
+      js: jsFiles.map(file => `/${file}`)
+    };
+  } catch {
+    console.warn('Bundles directory not found, webpack may not have run yet');
+    return { css: [], js: [] };
+  }
 }
 
 export default async function(eleventyConfig) {
@@ -78,14 +60,48 @@ export default async function(eleventyConfig) {
   });
 
   const staticDir = `${config.dir.input}/static`;
+  const bundlesDir = `${config.dir.input}/assets/bundles`;
+  
   eleventyConfig.addPassthroughCopy({
     [staticDir]: '/',
+    [bundlesDir]: '/',
   });
 
-  let cssPath;
-  eleventyConfig.on('eleventy.before', async () => {
-    cssPath = await compileCSS();
+  eleventyConfig.addShortcode('cssPath', () => {
+    const bundles = getBundleFiles();
+    return bundles.css[0] || '';
   });
-  eleventyConfig.addShortcode('cssPath', () => cssPath);
-  eleventyConfig.addWatchTarget(`${config.dir.input}/assets/css/`);
+  
+  eleventyConfig.addShortcode('jsPath', () => {
+    const bundles = getBundleFiles();
+    const mainFile = bundles.js.find(file => file.includes('main'));
+    return mainFile || '';
+  });
+  
+  eleventyConfig.addShortcode('vendorPath', () => {
+    const bundles = getBundleFiles();
+    const vendorFile = bundles.js.find(file => file.includes('vendor'));
+    return vendorFile || '';
+  });
+
+  eleventyConfig.addShortcode('asciinema', (url, options = {}) => {
+    const defaultOptions = {
+      theme: 'asciinema',
+      fontSize: 'small',
+      ...options
+    };
+    
+    const optionsStr = Object.entries(defaultOptions)
+      .map(([key, value]) => `${key}="${value}"`)
+      .join(' ');
+    
+    return `<div class="asciinema-player" data-url="${url}" ${optionsStr}></div>
+<script>
+  if (window.AsciinemaPlayer) {
+    AsciinemaPlayer.create('${url}', document.querySelector('.asciinema-player'), ${JSON.stringify(defaultOptions)});
+  }
+</script>`;
+  });
+
+  eleventyConfig.setUseGitIgnore(false);
 };
