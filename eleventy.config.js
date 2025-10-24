@@ -65,7 +65,10 @@ export default async function(eleventyConfig) {
   eleventyConfig.addPlugin(syntaxHighlight, {
     preAttributes: {
       tabindex: 0,
-      class: 'highlight',
+      class: ({ language }) => {
+        // https://prismjs.com/plugins/diff-highlight/
+        return language.includes('diff') ? 'highlight diff-highlight' : 'highlight';
+      },
     },
   });
   
