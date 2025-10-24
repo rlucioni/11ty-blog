@@ -85,8 +85,8 @@ export default async function(eleventyConfig) {
     debug: true,
     filter: '**/*.cast',
     // copies src/posts/post-name/foo.cast to dist/post-name/foo.cast
-		rename: filePath => `../${filePath}`,
-	});
+    rename: filePath => `../${filePath}`,
+  });
 
   eleventyConfig.addShortcode('cssPath', () => {
     const bundles = getBundleFiles();
