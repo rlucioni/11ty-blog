@@ -3,8 +3,6 @@ title: Parallel Progress
 description: Visually tracking the progress of Python tasks running in parallel.
 date: 2016-03-11T21:52:21-04:00
 lastmod: 2019-03-14T16:10:21-04:00
-layout: post.liquid
-tags: post
 ---
 
 Need to keep an eye on the progress of parallelized tasks? If you're using Python's [`concurrent.futures`](https://docs.python.org/3/library/concurrent.futures.html) module, one way to do it is with [`tqdm`](https://pypi.org/project/tqdm/), a nice package for generating progress bars. Here's how it looks.

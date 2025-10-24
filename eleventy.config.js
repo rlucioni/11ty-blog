@@ -80,8 +80,13 @@ export default async function(eleventyConfig) {
     [`${bundlesDir}/**`]: '/',
   });
 
-  // copy .cast files, preserving directory structure
-  eleventyConfig.addPassthroughCopy(`${config.dir.input}/**/*.cast`);
+  eleventyConfig.addPassthroughCopy(`${config.dir.input}/posts`, {
+    // https://github.com/timkendrick/recursive-copy/blob/4c9a8b8a4bf573285e9c4a649a30a2b59ccf441c/README.md#usage
+    debug: true,
+    filter: '**/*.cast',
+    // copies src/posts/post-name/foo.cast to dist/post-name/foo.cast
+		rename: filePath => `../${filePath}`,
+	});
 
   eleventyConfig.addShortcode('cssPath', () => {
     const bundles = getBundleFiles();
