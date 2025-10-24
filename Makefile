@@ -10,3 +10,6 @@ dev: clean
 
 lint:
 	npx eslint .
+
+post:
+	./scripts/new-post.sh $(slug)
