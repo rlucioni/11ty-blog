@@ -9,7 +9,7 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/rlucioni/11ty-blog/issues"
   },
@@ -25,7 +25,10 @@
     "@11ty/eleventy-plugin-syntaxhighlight": "5.0.2",
     "asciinema-player": "3.12.1",
     "markdown-it": "14.1.0",
-    "markdown-it-anchor": "9.2.0"
+    "markdown-it-anchor": "9.2.0",
+    "markdown-it-footnote": "4.0.0",
+    "markdown-it-table": "4.1.1",
+    "prismjs": "1.30.0"
   },
   "devDependencies": {
     "@eslint/compat": "1.4.0",

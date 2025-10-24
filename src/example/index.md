@@ -9,9 +9,9 @@ draft: true
 
 This is an example post to showcase Markdown and other markup rendering.
 
-*Here's some italicized text.* **And here's some bolded text.** ~~Here's some strikethrough.~~
+*Here's some italicized text.* **And here's some bolded text.** ~~Here's some strikethrough.~~ "This text has some quotes around it."
 
-> Here's a block quote. Wow, amazing! What a great block quote. What if it gets really long? I guess we'll see what happens.
+> Here's a block quote. Wow, amazing! What a great block quote. What if it gets really long? It should wrap around to the next line.
 
 Hyphens - should be converted -- like this. And also --- like this.
 
@@ -58,10 +58,10 @@ import os
 from sys import path
 
 # an example comment
-# and another extremely long comment that just won't end for some reason
 if True and True:
     path.append('foo')
 
+# another really long comment that just won't end for some reason; wow it really keeps going and going and going, hopefully you had to scroll horizontally to get here without it running off the page
 def foo(bar):
     return bar
 
@@ -79,19 +79,18 @@ Here are some images.
 
 ![](800x400.png)
 
-Resize to width of 200px while preserving aspect ratio:
+They can be automatically processed into better file formats and resized, such as to a width of 200px while preserving aspect ratio:
 
 <img src="800x400.png" alt="800x400 resized to width of 200px" width="200">
 
 ### Tables
 
-Here's how you make a table:
+You can create tables with pipes `|` and hyphens `-`. Pipes separate each column. Hyphens create each column's header.
 
-   Name | Points
---------|------
-    Bob | 27
-  Alice | 23
-   Mary | 19
+First Header  | Second Header
+------------- | -------------
+Content Cell  | Content Cell
+Content Cell  | Content Cell
 
 Phew, that was a lot of examples.
 

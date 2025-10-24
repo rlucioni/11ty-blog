@@ -3,6 +3,7 @@ build: clean
 
 clean:
 	rm -rf dist
+	rm -rf src/assets/bundles
 
 dev: clean
 	npm run dev

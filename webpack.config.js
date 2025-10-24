@@ -55,7 +55,9 @@ export default () => {
     optimization: {
       minimize: true,
       minimizer: [
-        new TerserPlugin(),
+        new TerserPlugin({
+          extractComments: false,
+        }),
         new CssMinimizerPlugin(),
       ],
       splitChunks: {
