@@ -51,14 +51,13 @@ export default async function(eleventyConfig) {
 
   eleventyConfig.addPlugin(eleventyImageTransformPlugin, {
     transformOnRequest: false,
-    formats: ['avif', 'webp', 'jpeg'],
+    formats: ['avif', 'webp', 'png'],
     widths: ['auto'],
     htmlOptions: {
       imgAttributes: {
         loading: 'lazy',
         decoding: 'async',
       },
-      pictureAttributes: {}
     },
   });
 
@@ -80,6 +79,9 @@ export default async function(eleventyConfig) {
     // appear. Using a glob pattern ensures the files are copied.
     [`${bundlesDir}/**`]: '/',
   });
+
+  // copy .cast files, preserving directory structure
+  eleventyConfig.addPassthroughCopy(`${config.dir.input}/**/*.cast`);
 
   eleventyConfig.addShortcode('cssPath', () => {
     const bundles = getBundleFiles();
@@ -105,22 +107,22 @@ export default async function(eleventyConfig) {
     return vendorFile || '';
   });
 
-  eleventyConfig.addShortcode('asciinema', (url, options = {}) => {
-    const defaultOptions = {
-      theme: 'asciinema',
-      fontSize: 'small',
-      ...options
+  eleventyConfig.addShortcode('asciinema', function (castFile) {
+    const castID = castFile.split('.').join('-');
+    const options = {
+      cols: 80,
+      rows: 10,
+      preload: true,
+      autoPlay: true,
+      loop: true,
+      theme: 'monokai',
     };
-    
-    const optionsStr = Object.entries(defaultOptions)
-      .map(([key, value]) => `${key}="${value}"`)
-      .join(' ');
-    
-    return `<div class="asciinema-player" data-url="${url}" ${optionsStr}></div>
+
+    return `<div id="${castID}"></div>
 <script>
-  if (window.AsciinemaPlayer) {
-    AsciinemaPlayer.create('${url}', document.querySelector('.asciinema-player'), ${JSON.stringify(defaultOptions)});
-  }
+document.addEventListener("DOMContentLoaded", function() {
+  window.AsciinemaPlayer.create("${castFile}", document.getElementById("${castID}"), ${JSON.stringify(options)});
+});
 </script>`;
   });
 
