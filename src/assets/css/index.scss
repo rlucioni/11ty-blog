@@ -1,4 +1,5 @@
 @import 'prismjs/themes/prism-okaidia.css';
+@import 'prismjs/plugins/diff-highlight/prism-diff-highlight.css';
 @import 'asciinema-player/dist/bundle/asciinema-player.css';
 
 $sans-serif: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
@@ -130,24 +131,6 @@ code, pre {
 .highlight {
   margin-bottom: 1rem;
   overflow: auto;
-}
-
-// Diff highlight styles for Prism.js diff-highlight plugin
-.diff-highlight .token.deleted {
-  background-color: hsl(350deg 100% 88% / 47%);
-}
-.diff-highlight .token.inserted {
-  background-color: hsl(120deg 73% 75% / 35%);
-}
-.diff-highlight .token.prefix.unchanged,
-.diff-highlight .token.prefix.inserted,
-.diff-highlight .token.prefix.deleted {
-  -webkit-user-select: none;
-  user-select: none;
-}
-.diff-highlight .token.inserted:not(.prefix),
-.diff-highlight .token.deleted:not(.prefix) {
-  display: block;
 }
 
 blockquote {

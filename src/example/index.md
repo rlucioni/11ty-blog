@@ -69,6 +69,15 @@ if __name__ == '__main__':
     foo('baz')
 ```
 
+What about diffs?
+
+```diff
+function foo() {
+-  return false;
++  return true;
+}
+```
+
 ### Images
 
 Here are some images.
