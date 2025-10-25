@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "webpack && eleventy",
-    "dev": "webpack --watch & eleventy --serve",
+    "dev": "webpack && (webpack --watch & eleventy --serve)",
     "lint": "eslint .",
     "prettier": "prettier . --write"
   },

@@ -136,7 +136,7 @@ ol {
 
 code,
 pre {
-  font-family: $monospace;
+  font-family: $monospace !important;
   font-weight: 400;
   font-size: 0.9rem;
   // disables kerning and ligatures for inline code and code blocks
@@ -161,6 +161,7 @@ div.ap-wrapper {
   display: block;
   margin: 1rem auto;
   max-width: 100%;
+  height: auto;
 }
 
 table {
