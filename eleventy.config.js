@@ -1,3 +1,4 @@
+import 'dotenv/config'
 import { readdirSync } from 'fs';
 import { eleventyImageTransformPlugin } from '@11ty/eleventy-img';
 import syntaxHighlight from '@11ty/eleventy-plugin-syntaxhighlight';

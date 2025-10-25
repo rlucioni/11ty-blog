@@ -1,52 +1,39 @@
 {
   "name": "11ty-blog",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/rlucioni/11ty-blog.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/rlucioni/11ty-blog/issues"
-  },
-  "homepage": "https://github.com/rlucioni/11ty-blog#readme",
+  "private": true,
   "type": "module",
   "scripts": {
     "build": "webpack && eleventy",
     "dev": "webpack --watch & eleventy --serve"
   },
   "dependencies": {
-    "@11ty/eleventy": "3.1.2",
     "@11ty/eleventy-img": "6.0.4",
     "@11ty/eleventy-plugin-syntaxhighlight": "5.0.2",
-    "asciinema-player": "3.12.1",
-    "markdown-it": "14.1.0",
-    "markdown-it-anchor": "9.2.0",
-    "markdown-it-footnote": "4.0.0",
-    "markdown-it-table": "4.1.1",
-    "prismjs": "1.30.0"
-  },
-  "devDependencies": {
+    "@11ty/eleventy": "3.1.2",
     "@eslint/compat": "1.4.0",
     "@eslint/js": "9.38.0",
+    "asciinema-player": "3.12.1",
     "autoprefixer": "10.4.21",
     "css-loader": "7.1.2",
     "css-minimizer-webpack-plugin": "7.0.2",
+    "dotenv": "17.2.3",
     "eslint": "9.38.0",
     "globals": "16.4.0",
     "html-minifier-terser": "7.2.0",
+    "markdown-it-anchor": "9.2.0",
+    "markdown-it-footnote": "4.0.0",
+    "markdown-it-table": "4.1.1",
+    "markdown-it": "14.1.0",
     "mini-css-extract-plugin": "2.9.4",
-    "postcss": "8.5.6",
     "postcss-loader": "8.2.0",
-    "sass": "1.93.2",
+    "postcss": "8.5.6",
+    "prismjs": "1.30.0",
     "sass-loader": "16.0.5",
+    "sass": "1.93.2",
     "style-loader": "4.0.0",
     "terser-webpack-plugin": "5.3.14",
-    "webpack": "5.102.1",
-    "webpack-cli": "6.0.1"
+    "webpack-cli": "6.0.1",
+    "webpack": "5.102.1"
   }
 }

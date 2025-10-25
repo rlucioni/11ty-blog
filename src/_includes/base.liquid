@@ -20,7 +20,15 @@
     <meta name="msapplication-TileColor" content="#272822">
     <meta name="theme-color" content="#272822">
 
-    <!-- Add Google Analytics or other tracking code here -->
+    {% if site.googleAnalyticsID %}
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.googleAnalyticsID }}"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', '{{ site.googleAnalyticsID }}');
+    </script>
+    {% endif %}
   </head>
   <body>
     <header id="header">
