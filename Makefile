@@ -9,7 +9,10 @@ dev: clean
 	npm run dev
 
 lint:
-	npx eslint .
+	npm run lint
 
 post:
 	./scripts/new-post.sh $(slug)
+
+prettier:
+	npm run prettier

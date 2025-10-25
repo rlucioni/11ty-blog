@@ -2,8 +2,11 @@
 @import 'prismjs/plugins/diff-highlight/prism-diff-highlight.css';
 @import 'asciinema-player/dist/bundle/asciinema-player.css';
 
-$sans-serif: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
-$monospace: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+$sans-serif:
+  -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif,
+  'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+$monospace:
+  'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
 
 $darker: #272822;
 $dark: #7c7c79;
@@ -40,7 +43,8 @@ a {
   text-decoration: none;
   border-bottom: 1px dashed $lighter;
 
-  &:hover, &:focus {
+  &:hover,
+  &:focus {
     border-bottom-style: solid;
   }
 }
@@ -55,7 +59,8 @@ a {
   a {
     border: 0;
 
-    &:hover, &:focus {
+    &:hover,
+    &:focus {
       color: $light;
     }
   }
@@ -71,14 +76,20 @@ a {
   margin: auto;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-weight: 300;
   line-height: normal;
 
   a {
     border: 0;
 
-    &:hover, &:focus {
+    &:hover,
+    &:focus {
       color: $light;
     }
   }
@@ -98,7 +109,9 @@ h3 {
   margin-bottom: 1rem;
   font-size: 1.2rem;
 }
-h4, h5, h6 {
+h4,
+h5,
+h6 {
   margin-top: 1rem;
   margin-bottom: 1rem;
   font-size: 1rem;
@@ -115,12 +128,14 @@ p {
   margin-bottom: 1rem;
 }
 
-ul, ol {
+ul,
+ol {
   margin-top: 0;
   margin-bottom: 1rem;
 }
 
-code, pre {
+code,
+pre {
   font-family: $monospace;
   font-weight: 400;
   font-size: 0.9rem;
@@ -140,7 +155,9 @@ blockquote {
   padding-right: 1rem;
 }
 
-img, video, div.ap-wrapper {
+img,
+video,
+div.ap-wrapper {
   display: block;
   margin: 1rem auto;
   max-width: 100%;
@@ -151,7 +168,8 @@ table {
   border-collapse: collapse;
   margin-bottom: 1rem;
 }
-th, td {
+th,
+td {
   padding: 0.25rem;
   border-top: 1px solid $dark;
   text-align: left;

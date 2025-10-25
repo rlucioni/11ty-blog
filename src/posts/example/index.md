@@ -7,7 +7,7 @@ draft: true
 
 This is an example post to showcase Markdown and other markup rendering.
 
-*Here's some italicized text.* **And here's some bolded text.** ~~Here's some strikethrough.~~ "This text has some quotes around it."
+_Here's some italicized text._ **And here's some bolded text.** ~~Here's some strikethrough.~~ "This text has some quotes around it."
 
 > Here's a block quote. Wow, amazing! What a great block quote. What if it gets really long? It should wrap around to the next line.
 
@@ -94,10 +94,10 @@ They can be automatically processed into better file formats and resized, such a
 
 You can create tables with pipes `|` and hyphens `-`. Pipes separate each column. Hyphens create each column's header.
 
-First Header  | Second Header
-------------- | -------------
-Content Cell  | Content Cell
-Content Cell  | Content Cell
+| First Header | Second Header |
+| ------------ | ------------- |
+| Content Cell | Content Cell  |
+| Content Cell | Content Cell  |
 
 Phew, that was a lot of examples.
 
